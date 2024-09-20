@@ -1,0 +1,401 @@
+{
+	"info": {
+		"_postman_id": "743004c7-6438-444e-8fb1-a6936c4e9531",
+		"name": "Evaluacion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3533416"
+	},
+	"item": [
+		{
+			"name": "CrearCliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Jose Lema\",\n    \"gender\": \"Masculino\",\n    \"age\": 30,\n    \"dni\": \"1234567890\",\n    \"address\": \"Otavalo sn y principal\",\n    \"phone\": \"0979256768\",\n    \"clientId\": 1001,\n    \"password\": \"password123\",\n    \"state\": \"true\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/core/cliente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"core",
+						"cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscarListaClientes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[2,3]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/core/cliente/listId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"core",
+						"cliente",
+						"listId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarCliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/core/cliente/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"core",
+						"cliente",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateCliente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":2,\n    \"name\": \"Jose Lema test\",\n    \"gender\": \"Masculino\",\n    \"age\": 30,\n    \"dni\": \"1234567890\",\n    \"address\": \"Otavalo sn y principal\",\n    \"phone\": \"0979256768\",\n    \"clientId\": 1001,\n    \"password\": \"password123\",\n    \"state\": \"true\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/core/cliente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"core",
+						"cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCliente",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/core/cliente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"core",
+						"cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarCuentaId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/core/cuenta/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"cuenta",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CrearCuenta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"numberCuenta\": \"123456789092\",\n  \"type\": \"Ahorro\",\n  \"initBalance\": 1000,\n  \"state\": true,\n  \"idCliente\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/core/cuenta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"cuenta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditarCuenta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"id\":2,\n  \"numberCuenta\": \"1234567890\",\n  \"type\": \"Ahorro\",\n  \"initBalance\": 1000.50,\n  \"state\": true,\n  \"idCliente\": 123\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/core/cuenta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"cuenta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminarCuenta",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/core/cuenta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"cuenta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarMovimientoId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/core/movement/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"movement",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CrearMovimiento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"AHORROS\",\n  \"value\": -100,\n  \"description\": \"R inicial\",\n  \"cuenta\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/core/movement",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"movement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditarMovimiento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":3,\n  \"type\": \"AHORROS\",\n  \"value\": 150.75,\n  \"description\": \"Deposito inicial\",\n  \"cuenta\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/core/movement",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"movement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reporteDeMovimientos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fechaInicio\": \"2024-09-19\",\n  \"fechaFin\": \"2024-09-25\",\n  \"clienteId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/core/movement/report?page=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"movement",
+						"report"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMovimiento",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/core/movement",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"movement"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

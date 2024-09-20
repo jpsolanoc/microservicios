@@ -138,7 +138,6 @@ public class MovementGeneralServiceImp implements MovementGeneralService {
                 reportemovimiento.setCliente(cliente.getName());
             }
         }));
-        System.out.println(microServerClientCore.sendPostCliente(idClientes).get(0).getClientId());
         MovimientosReportDTO movimientosReportDTO = new MovimientosReportDTO();
         movimientosReportDTO.setResponseMovementDTO(responseMovementDTO);
         movimientosReportDTO.setTotal(movimientosRepository.count(specification));

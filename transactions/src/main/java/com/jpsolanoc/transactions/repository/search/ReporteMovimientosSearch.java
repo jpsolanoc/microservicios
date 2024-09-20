@@ -1,9 +1,9 @@
 package com.jpsolanoc.transactions.repository.search;
 
-import com.jpsolanoc.transactions.util.Util;
 import com.jpsolanoc.transactions.dto.MovimientosDTOSearch;
 import com.jpsolanoc.transactions.entity.Cuenta;
 import com.jpsolanoc.transactions.entity.Movimientos;
+import com.jpsolanoc.transactions.util.Util;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
 

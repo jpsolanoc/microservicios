@@ -1,19 +1,23 @@
-package com.jpsolanoc.clientcore.entity;
+package com.jpsolanoc.transactions.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
-@Table(name = "cliente")
-public class Cliente extends Persona{
+@Table(name = "account")
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private Long clientId;
-    private String password;
+    private String numberAccount;
+    private String type;
+    private BigDecimal initBalance;
     private Boolean state;
+    private Integer clientId;
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class MovimientosReportDTO {
+public class MovementReportDTO {
     private List<ResponseMovementDTO> responseMovementDTO;
     private long total;
 }

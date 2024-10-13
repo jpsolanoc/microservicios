@@ -1,19 +1,20 @@
 package com.jpsolanoc.clientcore;
 
-import com.jpsolanoc.clientcore.dto.ClienteDTO;
+import com.jpsolanoc.clientcore.dto.CustomerDTO;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Resource {
-    public static ClienteDTO clienteDTO(Long id){
-        ClienteDTO clienteDTO = new ClienteDTO();
+    public static CustomerDTO clienteDTO(Long id){
+        CustomerDTO clienteDTO = new CustomerDTO();
         clienteDTO.setId(id);
         clienteDTO.setName("John Solano");
         clienteDTO.setGender("Masculino");
         clienteDTO.setAge(37);
-        clienteDTO.setDni("123456789");
+        clienteDTO.setDni(String.valueOf(ThreadLocalRandom.current().nextLong(1000000000L, 10000000000L)));
         clienteDTO.setAddress("Loja");
         clienteDTO.setPhone("+593979256768");
         clienteDTO.setPassword("1234");
-        clienteDTO.setClientId(1L);
         clienteDTO.setState(true);
         return clienteDTO;
     }

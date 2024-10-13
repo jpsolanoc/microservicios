@@ -1,6 +1,6 @@
 package com.jpsolanoc.transactions.entity;
 
-import com.jpsolanoc.transactions.enumdata.TipoMovimiento;
+import com.jpsolanoc.transactions.enumdata.MovementType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,9 +13,9 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "movimientos")
+@Table(name = "movements")
 @ToString
-public class Movimientos {
+public class Movements {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -25,11 +25,11 @@ public class Movimientos {
     @Column(name = "create_at")
     private Date createAt;
     @Enumerated(EnumType.STRING)
-    private TipoMovimiento type;
+    private MovementType type;
     private BigDecimal value;
     private BigDecimal balance;
     private String description;
     @ManyToOne
-    @JoinColumn(name = "cuenta_id", nullable = false)
-    private Cuenta cuenta;
+    @JoinColumn(name = "acount_id", nullable = false)
+    private Account acount;
 }

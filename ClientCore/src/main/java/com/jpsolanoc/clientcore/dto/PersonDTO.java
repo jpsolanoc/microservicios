@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PersonaDTO {
+public class PersonDTO {
     private Long id;
     @NotNull(message = "El nombre es requerido.")
     private String name;

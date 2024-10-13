@@ -8,11 +8,11 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class MovimientosDTOSearch {
+public class MovementDTOSearch {
     @NotNull(message = "La fecha de inicio es requerido.")
-    private Date fechaInicio;
+    private Date dateInit;
     @NotNull(message = "La fecha de fin es requerido.")
-    private Date fechaFin;
+    private Date dateEnd;
     @NotNull(message = "El id del cliente es requerido.")
-    private Long clienteId;
+    private Long clientId;
 }

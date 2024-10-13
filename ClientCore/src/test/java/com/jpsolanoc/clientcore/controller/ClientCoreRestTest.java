@@ -2,9 +2,8 @@ package com.jpsolanoc.clientcore.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jpsolanoc.clientcore.Resource;
-import com.jpsolanoc.clientcore.dto.ClienteDTO;
-import com.jpsolanoc.clientcore.entity.Cliente;
-import com.jpsolanoc.clientcore.repository.ClienteRepository;
+import com.jpsolanoc.clientcore.dto.CustomerDTO;
+import com.jpsolanoc.clientcore.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +28,7 @@ class ClientCoreRestTest {
 
     private ObjectMapper objectMapper;
     @Autowired
-    private ClienteRepository clienteRepository;
+    private CustomerRepository clienteRepository;
 
     @BeforeEach
     public void setup() {
@@ -37,19 +36,19 @@ class ClientCoreRestTest {
     }
 
     @Test
-    void testCrearCuentaOk() throws Exception {
-        ClienteDTO cuentaDTO = Resource.clienteDTO(null);
-        mockMvc.perform(post("/core/cliente")
+    void testCrearClientOk() throws Exception {
+        CustomerDTO cuentaDTO = Resource.clienteDTO(null);
+        mockMvc.perform(post("/core/clientes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuentaDTO)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void testEditCuentaOk() throws Exception {
-        testCrearCuentaOk();
-        ClienteDTO cuentaDTO = Resource.clienteDTO(clienteRepository.findAll().get(0).getId());
-        mockMvc.perform(put("/core/cliente")
+    void testEditClientOk() throws Exception {
+        testCrearClientOk();
+        CustomerDTO cuentaDTO = Resource.clienteDTO(clienteRepository.findAll().get(0).getId());
+        mockMvc.perform(put("/core/clientes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuentaDTO)))
                 .andExpect(status().isOk());

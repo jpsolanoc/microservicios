@@ -9,9 +9,9 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "persona")
+@Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Persona {
+public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

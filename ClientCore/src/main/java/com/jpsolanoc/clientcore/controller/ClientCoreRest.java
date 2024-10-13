@@ -1,64 +1,53 @@
 package com.jpsolanoc.clientcore.controller;
 
-import com.jpsolanoc.clientcore.dto.ClienteDTO;
-import com.jpsolanoc.clientcore.service.ClientCoreService;
+import com.jpsolanoc.clientcore.dto.CustomerDTO;
+import com.jpsolanoc.clientcore.service.CustomerCoreService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
-
+@Validated
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(path = "/core")
 @RestController
 public class ClientCoreRest {
 
-    private final ClientCoreService clientCoreService;
+    private final CustomerCoreService clientCoreService;
 
-    public ClientCoreRest(ClientCoreService clientCoreService) {
+    public ClientCoreRest(CustomerCoreService clientCoreService) {
         this.clientCoreService = clientCoreService;
     }
 
-    @PostMapping("/cliente")
-    public ResponseEntity<Object> createClient(@Valid @RequestBody ClienteDTO client, BindingResult result) {
-        managerError(result);
-        return clientCoreService.crearUpdateCliente(client);
+    @PostMapping("/clientes")
+    public ResponseEntity<Object> createClient(@Valid @RequestBody CustomerDTO client) {
+        return clientCoreService.crearteOrUpdateCustomer(client);
     }
 
-    @DeleteMapping("/cliente")
+    @DeleteMapping("/clientes")
     public ResponseEntity<Object> deleteClient(@RequestHeader Long id) {
         Objects.requireNonNull(id);
-        return clientCoreService.deleteCliente(id);
+        return clientCoreService.deleteCustomer(id);
     }
 
-    @PutMapping("/cliente")
-    public ResponseEntity<Object> updateClient(@Valid @RequestBody ClienteDTO client, BindingResult result) {
-        managerError(result);
+    @PutMapping("/clientes")
+    public ResponseEntity<Object> updateClient(@Valid @RequestBody CustomerDTO client) {
         Objects.requireNonNull(client.getId(),"El id es requerido para actualizar");
-        return clientCoreService.crearUpdateCliente(client);
+        return clientCoreService.crearteOrUpdateCustomer(client);
     }
 
-    @GetMapping("/cliente/{id}")
+    @GetMapping("/clientes/{id}")
     public ResponseEntity<Object> getClient(@PathVariable Long id) {
         Objects.requireNonNull(id);
-        return clientCoreService.getCliente(id);
+        return clientCoreService.getCustomer(id);
     }
 
-    @PostMapping("/cliente/listId")
+    @PostMapping("/clientes/listId")
     public ResponseEntity<Object> searchClientesIds(@RequestBody List<Long> idClientes) {
         Objects.requireNonNull(idClientes);
-        return clientCoreService.getClientes(idClientes);
-    }
-
-
-    public void managerError(BindingResult result){
-        if (result.hasErrors()) {
-            List<String> errorMessages = result.getFieldErrors().stream()
-                    .map(error -> "Campo: " + error.getField() + " - " + error.getDefaultMessage())
-                    .toList();
-            ResponseEntity.badRequest().body("Errores en los parámetros: " + String.join(", ", errorMessages));
-        }
+        return clientCoreService.getCustomers(idClientes);
     }
 }

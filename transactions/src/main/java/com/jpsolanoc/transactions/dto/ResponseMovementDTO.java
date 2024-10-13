@@ -1,6 +1,6 @@
 package com.jpsolanoc.transactions.dto;
 
-import com.jpsolanoc.transactions.entity.Movimientos;
+import com.jpsolanoc.transactions.entity.Movements;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,13 +18,13 @@ public class ResponseMovementDTO {
     private BigDecimal movimiento;
     private BigDecimal saldoDisponible;
 
-    public ResponseMovementDTO(Movimientos movimientos) {
+    public ResponseMovementDTO(Movements movimientos) {
         this.fecha = movimientos.getCreateAt().toString();
-        this.cliente = movimientos.getCuenta().getIdCliente().toString();
-        this.numeroCuenta = movimientos.getCuenta().getNumberCuenta();
+        this.cliente = movimientos.getAccount().getClientId().toString();
+        this.numeroCuenta = movimientos.getAccount().getNumberAccount();
         this.tipo = movimientos.getType().getDescripcion();
         this.saldoInicial = movimientos.getBalance().add(movimientos.getValue().negate());
-        this.estado = movimientos.getCuenta().getState();
+        this.estado = movimientos.getAccount().getState();
         this.movimiento = movimientos.getValue();
         this.saldoDisponible =movimientos.getBalance();
     }

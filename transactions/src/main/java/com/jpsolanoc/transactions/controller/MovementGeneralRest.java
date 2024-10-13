@@ -1,19 +1,18 @@
 package com.jpsolanoc.transactions.controller;
 
-import com.jpsolanoc.transactions.dto.CuentaDTO;
-import com.jpsolanoc.transactions.dto.MovimientosDTO;
-import com.jpsolanoc.transactions.dto.MovimientosDTOSearch;
+import com.jpsolanoc.transactions.dto.AccountDTO;
+import com.jpsolanoc.transactions.dto.MovementDTO;
+import com.jpsolanoc.transactions.dto.MovementDTOSearch;
 import com.jpsolanoc.transactions.service.MovementGeneralService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.Objects;
 
+@Validated
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(path = "/core")
 @RestController
@@ -26,69 +25,53 @@ public class MovementGeneralRest {
         this.movementGeneralService = movementGeneralService;
     }
 
-    @PostMapping("/cuenta")
-    public ResponseEntity<Object> createCuenta(@Valid @RequestBody CuentaDTO cuentaDTO, BindingResult result) {
-        managerError(result);
-        return movementGeneralService.createOrUpdateCuenta(cuentaDTO);
+    @PostMapping("/cuentas")
+    public ResponseEntity<Object> createCuenta(@Valid @RequestBody AccountDTO cuentaDTO) {
+        return movementGeneralService.createOrUpdateAccount(cuentaDTO);
     }
 
-    @DeleteMapping("/cuenta")
+    @DeleteMapping("/cuentas")
     public ResponseEntity<Object> deleteCuenta(@RequestHeader Long id) {
         Objects.requireNonNull(id);
-        return movementGeneralService.deleteCuenta(id);
+        return movementGeneralService.deleteAccount(id);
     }
 
-    @PutMapping("/cuenta")
-    public ResponseEntity<Object> updateCuenta(@Valid @RequestBody CuentaDTO cuentaDTO, BindingResult result) {
-        managerError(result);
+    @PutMapping("/cuentas")
+    public ResponseEntity<Object> updateCuenta(@Valid @RequestBody AccountDTO cuentaDTO) {
         Objects.requireNonNull(cuentaDTO.getId());
-        return movementGeneralService.createOrUpdateCuenta(cuentaDTO);
+        return movementGeneralService.createOrUpdateAccount(cuentaDTO);
     }
 
-    @GetMapping("/cuenta/{id}")
+    @GetMapping("/cuentas/{id}")
     public ResponseEntity<Object> getCuentaForId(@PathVariable Long id) {
         Objects.requireNonNull(id);
-        return movementGeneralService.getCuentaForId(id);
+        return movementGeneralService.getAccountForId(id);
     }
-    @PostMapping("/movement")
-    public ResponseEntity<Object> createMovimientos(@Valid @RequestBody MovimientosDTO movimientosDTO,
-                                                    BindingResult result) {
-        managerError(result);
-        return movementGeneralService.createOrUpdateMoviminetos(movimientosDTO);
+    @PostMapping("/movimientos")
+    public ResponseEntity<Object> createMovimientos(@Valid @RequestBody MovementDTO movimientosDTO) {
+        return movementGeneralService.createOrUpdateMovement(movimientosDTO);
     }
 
-    @DeleteMapping("/movement")
+    @DeleteMapping("/movimientos")
     public ResponseEntity<Object> deleteMovimientos(@RequestHeader Long id) {
         Objects.requireNonNull(id);
-        return movementGeneralService.deleteMovimientos(id);
+        return movementGeneralService.deleteMovement(id);
     }
 
-    @PutMapping("/movement")
-    public ResponseEntity<Object> updateMoviminetos(@Valid @RequestBody MovimientosDTO movimientosDTO, BindingResult result) {
-        managerError(result);
+    @PutMapping("/movimientos")
+    public ResponseEntity<Object> updateMoviminetos(@Valid @RequestBody MovementDTO movimientosDTO) {
         Objects.requireNonNull(movimientosDTO.getId());
-        return movementGeneralService.createOrUpdateMoviminetos(movimientosDTO);
+        return movementGeneralService.createOrUpdateMovement(movimientosDTO);
     }
 
-    @GetMapping("/movement/{id}")
+    @GetMapping("/movimientos/{id}")
     public ResponseEntity<Object> getMovimientosForId(@PathVariable Long id) {
         Objects.requireNonNull(id);
-        return movementGeneralService.getMovimientosForId(id);
+        return movementGeneralService.getMovementForId(id);
     }
 
-    @PostMapping("/movement/report")
-    public ResponseEntity<Object> searchMovement(@Valid @RequestBody MovimientosDTOSearch movimientosDTO, Pageable pageable, BindingResult result) {
-        managerError(result);
-        return movementGeneralService.reporteMovimientos(movimientosDTO,pageable);
+    @PostMapping("/movimientos/report")
+    public ResponseEntity<Object> searchMovement(@Valid @RequestBody MovementDTOSearch movimientosDTO, Pageable pageable) {
+        return movementGeneralService.reporteMovement(movimientosDTO,pageable);
     }
-
-    public void managerError(BindingResult result){
-        if (result.hasErrors()) {
-            List<String> errorMessages = result.getFieldErrors().stream()
-                    .map(error -> "Campo: " + error.getField() + " - " + error.getDefaultMessage())
-                    .toList();
-            ResponseEntity.badRequest().body("Errores en los parámetros: " + String.join(", ", errorMessages));
-        }
-    }
-
 }

@@ -1,8 +1,8 @@
 package com.jpsolanoc.transactions.repository.search;
 
-import com.jpsolanoc.transactions.dto.MovimientosDTOSearch;
-import com.jpsolanoc.transactions.entity.Cuenta;
-import com.jpsolanoc.transactions.entity.Movimientos;
+import com.jpsolanoc.transactions.dto.MovementDTOSearch;
+import com.jpsolanoc.transactions.entity.Account;
+import com.jpsolanoc.transactions.entity.Movements;
 import com.jpsolanoc.transactions.util.Util;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
@@ -11,25 +11,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ReporteMovimientosSearch implements Specification<Movimientos> {
+public class ReporteMovimientosSearch implements Specification<Movements> {
 
-    private final MovimientosDTOSearch dtoSearch;
+    private final MovementDTOSearch dtoSearch;
 
-    public ReporteMovimientosSearch(MovimientosDTOSearch dtoSearch) {
+    public ReporteMovimientosSearch(MovementDTOSearch dtoSearch) {
         this.dtoSearch = dtoSearch;
     }
 
     @Override
-    public Predicate toPredicate(Root<Movimientos> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+    public Predicate toPredicate(Root<Movements> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
-        Join<Movimientos, Cuenta> cuentaJoin = root.join("cuenta");
-        predicates.add(criteriaBuilder.equal(cuentaJoin.get("idCliente"), dtoSearch.getClienteId()));
-        if (dtoSearch.getFechaInicio()!= null && dtoSearch.getFechaFin() != null) {
-            Date from = Util.addOneDay(dtoSearch.getFechaInicio());
-            Date to = Util.addOneDay(dtoSearch.getFechaFin());
-            predicates.add(criteriaBuilder.between(root.get("createAt"),
-                    Util.addHourOfDate(from,0,0,0),
-                    Util.addHourOfDate(to,23,59,59)));
+        Join<Movements, Account> cuentaJoin = root.join("account");
+        predicates.add(criteriaBuilder.equal(cuentaJoin.get("clientId"), dtoSearch.getClientId()));
+
+        if (dtoSearch.getDateInit() != null && dtoSearch.getDateEnd() != null) {
+            Date from = Util.addHourOfDate(dtoSearch.getDateInit(), 0, 0, 0);
+            Date to = Util.addHourOfDate(dtoSearch.getDateEnd(), 23, 59, 59);
+            predicates.add(criteriaBuilder.between(root.get("createAt"), from, to));
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }

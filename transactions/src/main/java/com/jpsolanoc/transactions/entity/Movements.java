@@ -30,6 +30,6 @@ public class Movements {
     private BigDecimal balance;
     private String description;
     @ManyToOne
-    @JoinColumn(name = "acount_id", nullable = false)
-    private Account acount;
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
 }

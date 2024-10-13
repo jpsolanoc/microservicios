@@ -3,8 +3,8 @@ package com.jpsolanoc.transactions.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jpsolanoc.transactions.Resource;
 import com.jpsolanoc.transactions.app.MicroServerClientCore;
-import com.jpsolanoc.transactions.dto.CuentaDTO;
-import com.jpsolanoc.transactions.dto.MovimientosDTOSearch;
+import com.jpsolanoc.transactions.dto.AccountDTO;
+import com.jpsolanoc.transactions.dto.MovementDTOSearch;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,8 +41,8 @@ class MovementGeneralRestTest {
 
     @Test
     void testCrearCuentaOk() throws Exception {
-        CuentaDTO cuentaDTO = Resource.cuentaDTO();
-        mockMvc.perform(post("/core/cuenta")
+        AccountDTO cuentaDTO = Resource.cuentaDTO();
+        mockMvc.perform(post("/core/cuentas")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuentaDTO)))
                 .andExpect(status().isOk());
@@ -52,8 +52,8 @@ class MovementGeneralRestTest {
     @Test
     void testMovimientosIntegrationClientesOk() throws Exception {
         when(microServerClientCore.sendPostCliente(Mockito.anyList())).thenReturn(Resource.clienteDTOS());
-        MovimientosDTOSearch movimientosDTOSearch = Resource.movimientosDTOSearch();
-        mockMvc.perform(post("/core/movement/report")
+        MovementDTOSearch movimientosDTOSearch = Resource.movimientosDTOSearch();
+        mockMvc.perform(post("/core/movimientos/report")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(movimientosDTOSearch)))
                 .andExpect(status().isOk());
